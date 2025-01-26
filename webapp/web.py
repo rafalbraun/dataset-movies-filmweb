@@ -3,6 +3,7 @@ import sqlite3
 import math
 import json
 import datetime
+from urllib.parse import unquote
 
 app = Flask(__name__)
 
@@ -21,6 +22,17 @@ def movies():
 	with sqlite3.connect(dbname) as conn:
 		conn.row_factory = sqlite3.Row
 		rows = conn.execute(f'select {cols} from movies order by descr_id limit {results_per_page} offset {offset}').fetchall()
+		
+		rows_as_dicts = [dict(row) for row in rows]
+		
+		for row in rows_as_dicts:
+			if row["filmweb_url"]:
+				url = unquote(row["filmweb_url"]).replace('+', ' ')
+				segment = url.split('/')[4]
+				parts = segment.split('-')
+				row['title'] = parts[0]
+				row['year'] = parts[1]
+
 		total_results = conn.execute(f'select count(*) from movies').fetchone()[0]
 		##page_count = math.ceil(count/page_size)
 		total_pages = math.ceil(total_results/results_per_page)
@@ -30,7 +42,7 @@ def movies():
 		start_page = max(1, page - 3)
 		end_page = min(total_pages, page + 3)
 
-	return render_template('movies.html', movies=rows, page=page, total_pages=total_pages, start_page=start_page, end_page=end_page)
+	return render_template('movies.html', movies=rows_as_dicts, page=page, total_pages=total_pages, start_page=start_page, end_page=end_page)
 
 @app.route('/details/<int:id>', methods=['GET', 'POST'])
 def details(id):

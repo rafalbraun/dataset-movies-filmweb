@@ -63,6 +63,8 @@
             <thead>
                 <tr>
                     <th>ID</th>
+                    <th>title</th>
+                    <th>year</th>
                     <th>Synopsis</th>
                     <th>Details</th>
                 </tr>
@@ -71,6 +73,8 @@
                 {% for movie in movies %}
                 <tr>
                     <td>{{ movie.id }}</td>
+                    <td>{{ movie.title }}</td>
+                    <td>{{ movie.year }}</td>
                     <td>
                         <a href="{{ movie.filmweb_url }}">{{ movie.filmweb_url }}</a><br><br>
                         {{ movie.synopsis }}

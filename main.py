@@ -1,6 +1,7 @@
 from datetime import datetime
 import sqlite3
 import time
+import random
 import re
 
 from search_google_selenium import google_search as fun1
@@ -21,6 +22,7 @@ def find_movie(descr_id, synopsis):
     results = fun1("site:filmweb.pl "+truncated_description)
 
     if not results:
+        #exit(1)
         return "-"
 
     result_links= []
@@ -36,10 +38,12 @@ def find_movie(descr_id, synopsis):
     result = "-"
     if len(result_links) == 1:
         result = result_links[0]
+    
+    time.sleep(random.uniform(2, 5))  # Opóźnienie 2-5 sekund
 
     return result
 
-def update_database_with_links(conn, limit=1):
+def update_database_with_links(conn, limit=10):
     """
     Aktualizuje bazę danych `movies`, wstawiając poprawne linki do `filmweb_url`.
     """
