@@ -1,0 +1,128 @@
+/* General Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 20px;
+}
+
+header a {
+    text-decoration: none;
+    color: #333;
+}
+
+/* Header Styles */
+header {
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo a {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+}
+
+nav {
+    flex: 1;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    font-size: 1em;
+    padding: 5px 10px;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #007BFF;
+}
+
+/* Profile Links */
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.profile a {
+    margin-left: 15px;
+    padding: 5px 10px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+}
+
+.profile a.signup {
+    border-color: #007BFF;
+    color: #007BFF;
+}
+
+.profile a.signup:hover {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+input, textarea { width: 100%; }
+textarea { min-height: 200px; }
+main {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+}
+.pagination {
+    padding-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    text-align: left;
+    padding: 8px;
+    vertical-align: top; /* Aligns content to the top */
+}
+
+/* Define fixed widths for columns */
+.col-fixed-1 {
+    width: 50px;
+}
+.col-fixed-2 {
+    width: 500px;
+}
+.col-fixed-3 {
+    width: 600px;
+}
+.col-fixed-4 {
+    width: 50px;
+}
+
+
+
+
+
+
+
+

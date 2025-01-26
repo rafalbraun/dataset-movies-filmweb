@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+<main>
+
+	Found {{ count }} results, some may not have been shown on this page.
+
+	<table style="width: 100%">
+		<tr>
+			<th>id</th>
+			<th>url</th>
+			<th>json_body</th>
+			<th>details</th>
+		</tr>
+		{% for movie in movies %}
+		<tr>
+			<td>{{ movie.desc_id }}</td>
+			<td>
+				{% if movie.url is not none %}
+				<a href="{{ movie.url }}">{{ movie.url }}</a>
+				{% endif %}
+			</td>
+			<td>{{ movie.json_body }}</td>
+
+			<td><a href="/details/{{ movie.desc_id }}">details</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+
+</main>
+
+{% endblock %}

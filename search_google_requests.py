@@ -5,11 +5,9 @@ from bs4 import BeautifulSoup
 import requests
 
 def google_search(query, num_results=5):
-    # Przygotowanie zapytania
     query = query.replace(" ", "+")
     url = f"https://www.google.com/search?q={query}&num={num_results}"
     
-    # Nagłówki dla emulacji przeglądarki (z Twojego zapytania)
     headers = {
         "Host": "www.google.com",
         "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0",
@@ -29,23 +27,19 @@ def google_search(query, num_results=5):
         "TE": "trailers"
     }
     
-    # Wysłanie zapytania
     response = requests.get(url, headers=headers)
-    response.raise_for_status()  # Rzuca wyjątek w przypadku błędu HTTP
+    response.raise_for_status()
 
     with open("page.html", "w") as f:
         f.write(response.text)
 
-    # Parsowanie wyników
     soup = BeautifulSoup(response.text, "html.parser")
     
-    # Wyszukiwanie linków w wynikach
-    search_results = soup.select("div.yuRUbf a")  # Nowa struktura wyników Google
+    search_results = soup.select("div.yuRUbf a")
     links = [result["href"] for result in search_results[:num_results]]
     
     return links
 
-# Przykładowe użycie
 query = "Python Selenium tutorial"
 results = google_search(query)
 

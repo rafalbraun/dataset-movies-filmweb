@@ -6,28 +6,31 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
-# Ścieżka do WebDriver (dostosuj do swojej lokalizacji)
 driver_path = "/usr/bin/chromedriver"
 
 def google_search(search_query):
     options = Options()
     options.add_argument("--disable-blink-features=AutomationControlled")
-    # options.add_argument("--headless")  # Tryb bez okna
-    # options.add_argument("--disable-gpu")  # Dla kompatybilności (Windows)
-    # options.add_argument("--no-sandbox")  # Przydatne w środowiskach bez GUI
-    # options.add_argument("--disable-dev-shm-usage")  # Ograniczenia pamięci współdzielonej
+    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36")
+    # options.add_argument("--headless")
+    # options.add_argument("--disable-gpu")
+    # options.add_argument("--no-sandbox")
+    # options.add_argument("--disable-dev-shm-usage")
 
-    # Inicjalizacja przeglądarki Chrome
     driver = webdriver.Chrome(driver_path, options=options)
 
-    try:
-        # Otwórz Google
-        driver.get("https://www.google.com")
+    driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
+        "source": """
+        Object.defineProperty(navigator, 'webdriver', {
+            get: () => undefined
+        })
+        """
+    })
 
-        # Poczekaj na załadowanie strony (opcjonalne, aby uniknąć problemów z ładowaniem)
+    try:
+        driver.get("https://www.google.com")
         time.sleep(2)
 
-        # Znajdź przycisk akceptacji cookies i kliknij
         try:
             accept_button = driver.find_element(By.XPATH, "//button[contains(., 'Zaakceptuj wszystko') or contains(., 'Accept all')]")
             accept_button.click()
@@ -35,17 +38,13 @@ def google_search(search_query):
         except Exception as e:
             print("Nie znaleziono przycisku cookies lub wystąpił błąd:", e)
 
-        # Znajdź pole wyszukiwania
         search_box = driver.find_element(By.NAME, "q")
 
-        # Wpisz zapytanie i naciśnij Enter
         search_box.send_keys(search_query)
         search_box.send_keys(Keys.RETURN)
 
-        # Poczekaj na załadowanie wyników
         time.sleep(2)
 
-        # Pobierz linki z wyników wyszukiwania
         search_results_container = driver.find_element(By.ID, "rso")
         search_results = search_results_container.find_elements(By.TAG_NAME, "a")
 
@@ -61,7 +60,6 @@ def google_search(search_query):
         print(f"Nie udało się znaleźć elementu 'rso' lub zebrać linków. Błąd: {e}")
 
     finally:
-        # Zamknij przeglądarkę
         driver.quit()
 
 #search_query="Szpital psychiatryczny Millhaven, rok 1979. Okultystyczny rytuał kończy się katastrofą. Z szanowanej niegdyś rodziny ocalała tylko jedna osoba. Sprawę odłożono na półkę na dziesiątki lat do czasu"

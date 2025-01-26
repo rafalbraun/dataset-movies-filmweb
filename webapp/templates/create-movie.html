@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+
+<main>
+	<form action="/create" method="post">
+
+		<label for="url">url:</label><br>
+		<input id="url" type="text" name="url">
+
+		<br>
+
+		<button type="submit">search</button>
+
+	</form>
+</main>
+
+{% endblock %}

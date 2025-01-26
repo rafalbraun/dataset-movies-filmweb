@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+<main>
+	<form action="/update/{{movie.id}}" method="post">
+		<label for="id">movie id:</label>
+		<input id="id" type="text" value="{{movie.id}}" readonly>
+		
+		<br>
+
+		<label for="details">details:</label><br>
+		<input id="details" name="synopsis" value="{{movie.synopsis}}" readonly>
+
+		<br>
+
+		<label for="filmweb_url">filmweb_url:</label><br>
+		<input id="filmweb_url" name="filmweb_url" value="{{movie.filmweb_url}}">
+
+		<br>
+
+		<button type="submit">update</button>
+
+	</form>
+</main>
+
+{% endblock %}
