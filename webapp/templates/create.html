@@ -2,12 +2,14 @@
 {% block content %}
 
 <main>
-	<form action="/create" method="post">
-		<label for="id">movie title:</label>
-		<input id="id" type="text" name="title">
+    <div class="container">
+		<form action="/create" method="post">
+			<label for="id">movie title:</label>
+			<input id="id" type="text" name="title">
 
-		<button type="submit">create</button>
-	</form>
+			<button type="submit">create</button>
+		</form>
+	</div>
 </main>
 
 {% endblock %}

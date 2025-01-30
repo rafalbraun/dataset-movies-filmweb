@@ -12,7 +12,7 @@ def google_search(search_query):
     options = Options()
     options.add_argument("--disable-blink-features=AutomationControlled")
     options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36")
-    #options.add_argument("--headless")
+    # options.add_argument("--headless")
     # options.add_argument("--disable-gpu")
     # options.add_argument("--no-sandbox")
     # options.add_argument("--disable-dev-shm-usage")
@@ -62,8 +62,6 @@ def google_search(search_query):
     finally:
         driver.quit()
 
-#search_query="Szpital psychiatryczny Millhaven, rok 1979. Okultystyczny rytuał kończy się katastrofą. Z szanowanej niegdyś rodziny ocalała tylko jedna osoba. Sprawę odłożono na półkę na dziesiątki lat do czasu"
-# search_query="Buntownicy, gwiazdy, rewelucjoniści! Ashe, McEnroe, Borg, King, Navratilova, Evert na zawsze odmienili oblicze tenisa. Stali się legendami tego sportu, ale walczyli także poza kortem. Odważnie przekraczali granice i mieli odwagę zmieniać świat. Twórcy programu przedstawiają złotą erę tenisa przez pryzmat turnieju w Wimbledonie."
-
-# google_search(search_query)
-# exit()
+if __name__ == "__main__":
+    search_query="Buntownicy, gwiazdy, rewelucjoniści! Ashe, McEnroe, Borg, King, Navratilova, Evert na zawsze odmienili oblicze tenisa. Stali się legendami tego sportu, ale walczyli także poza kortem. Odważnie przekraczali granice i mieli odwagę zmieniać świat. Twórcy programu przedstawiają złotą erę tenisa przez pryzmat turnieju w Wimbledonie."
+    google_search(search_query)

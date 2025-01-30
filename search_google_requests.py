@@ -40,9 +40,10 @@ def google_search(query, num_results=5):
     
     return links
 
-query = "Python Selenium tutorial"
-results = google_search(query)
+if __name__ == "__main__":
+    query = "Python Selenium tutorial"
+    results = google_search(query)
 
-print("Wyniki wyszukiwania:")
-for index, link in enumerate(results, start=1):
-    print(f"{index}. {link}")
+    print("Wyniki wyszukiwania:")
+    for index, link in enumerate(results, start=1):
+        print(f"{index}. {link}")

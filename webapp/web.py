@@ -8,7 +8,7 @@ from urllib.parse import unquote
 app = Flask(__name__)
 
 results_per_page = 30
-dbname = 'movies.db'
+dbname = 'test_movies.db'
 cols = "descr_id as id, filmweb_url, synopsis"
 
 @app.route('/')
@@ -95,4 +95,4 @@ def format_datetime(value):
 	return value[:10]
 
 if __name__=="__main__":
-	app.run(host='0.0.0.0', port=8080)
+	app.run(host='0.0.0.0', port=8080, debug=True)

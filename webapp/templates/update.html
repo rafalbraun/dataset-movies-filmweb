@@ -2,25 +2,30 @@
 {% block content %}
 
 <main>
-	<form action="/update/{{movie.id}}" method="post">
-		<label for="id">movie id:</label>
-		<input id="id" type="text" value="{{movie.id}}" readonly>
-		
-		<br>
+    <div class="container">
+		<form action="/update/{{movie.id}}" method="post">
+			<label for="id">movie id:</label>
+			<input id="id" type="text" value="{{movie.id}}" readonly>
+			
+			<br>
 
-		<label for="details">details:</label><br>
-		<input id="details" name="synopsis" value="{{movie.synopsis}}" readonly>
+			<label for="details">details:</label><br>
+			<input id="details" name="synopsis" value="{{movie.synopsis}}" readonly>
 
-		<br>
+			<br>
 
-		<label for="filmweb_url">filmweb_url:</label><br>
-		<input id="filmweb_url" name="filmweb_url" value="{{movie.filmweb_url}}">
+			<label for="filmweb_url">filmweb_url:</label><br>
+			{% if movie.filmweb_url is none %}
+			    Brak danych
+			{% else %}
+			    <input id="filmweb_url" name="filmweb_url" value="{{movie.filmweb_url}}">
+			{% endif %}
+			<br>
 
-		<br>
+			<button type="submit">update</button>
 
-		<button type="submit">update</button>
-
-	</form>
+		</form>
+	</div>
 </main>
 
 {% endblock %}

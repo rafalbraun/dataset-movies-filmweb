@@ -1,29 +1,62 @@
 /* General Styles */
 body, html {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
 }
-
 .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 10px 20px;
+    margin-bottom: 10px;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+table th {
+    background-color: #f4f4f4;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.pagination a {
+    text-decoration: none;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #333;
+    background: #f4f4f4;
+}
+.pagination a.active {
+    background: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+.pagination a:hover {
+    background: #007bff;
+    color: #fff;
 }
 
+/* Header Styles */
 header a {
     text-decoration: none;
     color: #333;
 }
 
-/* Header Styles */
 header {
     background-color: #f8f8f8;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logo a {
@@ -57,7 +90,24 @@ nav {
     color: #007BFF;
 }
 
-/* Profile Links */
+
+/* General Styles 
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 20px;
+}
+
 .profile {
     display: flex;
     align-items: center;
@@ -102,10 +152,9 @@ th, td {
     border: 1px solid #ccc;
     text-align: left;
     padding: 8px;
-    vertical-align: top; /* Aligns content to the top */
+    vertical-align: top;
 }
 
-/* Define fixed widths for columns */
 .col-fixed-1 {
     width: 50px;
 }
@@ -119,7 +168,7 @@ th, td {
     width: 50px;
 }
 
-
+*/
 
 
 

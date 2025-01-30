@@ -6,6 +6,10 @@ import re
 
 from search_google_selenium import google_search as fun1
 
+debug = True
+dbname = 'test_movies.db'
+limit = 20
+
 def remove_square_brackets(text):
     return re.sub(r'\[.*?\]', '', text)
 
@@ -22,7 +26,8 @@ def find_movie(descr_id, synopsis):
     results = fun1("site:filmweb.pl "+truncated_description)
 
     if not results:
-        #exit(1)
+        if debug:
+            exit(1)
         return "-"
 
     result_links= []
@@ -32,8 +37,8 @@ def find_movie(descr_id, synopsis):
     ]
     result_links = list(set(result_links))
 
-    # for index, link in enumerate(result_links, start=1):
-    #     print(f"{index}. {link}")
+    for index, link in enumerate(result_links, start=1):
+        print(f"{index}. {link}")
 
     result = "-"
     if len(result_links) == 1:
@@ -48,8 +53,11 @@ def update_database_with_links(conn, limit=10):
     Aktualizuje bazę danych `movies`, wstawiając poprawne linki do `filmweb_url`.
     """
     cursor = conn.cursor()
-    cursor.execute(f"SELECT descr_id, synopsis FROM movies WHERE filmweb_url = 'q' limit {limit}")
+    cursor.execute(f"SELECT descr_id, synopsis FROM movies WHERE filmweb_url is null limit {limit}")
     rows = cursor.fetchall()
+
+    if len(rows) == 0:
+        print("Nie znaleziono filmów do uzupełnienia")
 
     for descr_id, synopsis in rows:
         result = find_movie(descr_id, synopsis)
@@ -65,6 +73,10 @@ def is_within_time_range(start_hour, end_hour):
     current_hour = datetime.now().hour
     return start_hour <= current_hour < end_hour
 
+def run():
+    with sqlite3.connect(dbname) as conn:
+        update_database_with_links(conn)    
+
 def main():
     """
     Główna funkcja skryptu, uruchamiana tylko w wyznaczonym czasie.
@@ -75,12 +87,10 @@ def main():
             time.sleep(120)
         else:
             print("Rozpoczynam działanie skryptu...")
-            with sqlite3.connect('movies.db') as conn:
-                update_database_with_links(conn)
+            run()
 
 def test():
-    with sqlite3.connect('movies.db') as conn:
-        update_database_with_links(conn)
+    run()
 
 if __name__ == "__main__":
     #main()

@@ -2,15 +2,25 @@
 {% block content %}
 
 <main>
-	<a href="/update/{{movie.id}}">update</a>
+	<div class="container">
+		<a href="/update/{{movie.id}}">update</a>
 
-	<label>movie id: {{movie.id}}</label>
-	<br>
-	<label>details: {{movie.synopsis}}</label><br>
-	<br>
-	<label for="filmweb_url">filmweb_url: <a href="{{ movie.filmweb_url }}">{{ movie.filmweb_url }}</a></label><br>
-	<br>
-	
+		<label>movie id: {{movie.id}}</label>
+		<br>
+		<label>details: {{movie.synopsis}}</label><br>
+		<br>
+		
+		<label for="filmweb_url">filmweb_url: 
+		{% if movie.filmweb_url is none %}
+		    Brak danych
+		{% else %}
+		    <a href="{{ movie.filmweb_url }}">{{ movie.filmweb_url }}</a>
+		{% endif %}
+		</label>
+
+		<br>
+		<br>
+	</div>	
 </main>
 
 {% endblock %}
